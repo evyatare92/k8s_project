@@ -1,0 +1,21 @@
+rabbitmq:
+  server: rabbitmq-rabbitmq-ha
+  port: 5672
+  message: Hello
+  repeat: 30
+deployments:
+  version: apps/v1
+  producer:
+    name: producer
+    replicaCount: 1
+    image: evyatare92/producer
+    cpu: 100m
+    memory: 256Mi
+  consumer:
+    name: consumer
+    replicaCount: 1
+    image: evyatare92/consumer
+    cpu: 100m
+    memory: 256Mi
+    command: ["python"]
+    
