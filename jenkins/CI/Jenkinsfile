@@ -1,12 +1,12 @@
 pipeline{
     agent any
     stages{
-		stage("Get OS"){
+		stage("Install docker"){
 			steps{
-				sh script: "cat /etc/*-release"
+				sh script: "apt install docker-ce"
 			}
 		}
-        /*stage("Checkout"){
+        stage("Checkout"){
 			steps{
 				withCredentials([usernamePassword(credentialsId: 'docker-hub',usernameVariable: 'DOCKERHUB_USER',passwordVariable: 'DOCKERHUB_PASSWORD')]){
 					sh script: "docker login -u  ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}"
@@ -15,13 +15,15 @@ pipeline{
         }
 		stage("Build and Run"){
 			steps{
+				sh script: "cd jenkins/CI"
 				sh script: "docker-compose up -d"
 			}
 		}
         stage("Finalize"){
 			steps{
+				sh script: "cd jenkins/CI"
 				sh script: 'docker-compose push'
 			}
-        }*/
+        }
     }
 }
