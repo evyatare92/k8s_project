@@ -1,10 +1,10 @@
 version: '3.0'
 services:
   consumer:
-    build: src/consumer
+    build: consumer
     image: evyatare92/consumer
     restart: always
   producer:
-    build: src/producer
+    build: producer
     image: evyatare92/producer
     restart: always
