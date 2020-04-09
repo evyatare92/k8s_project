@@ -8,16 +8,15 @@ pipeline{
 				}
 			}
         }
-		stage("Build and Run"){
+		stage("Build"){
 			steps{
-				sh script: "cd jenkins/CI"
-				sh script: "docker-compose up -d"
+				sh script: "cd src"
+				sh script: "docker-compose build"
 			}
 		}
-        stage("Finalize"){
+        stage("Push"){
 			steps{
-				sh script: "cd jenkins/CI"
-				sh script: 'docker-compose push'
+				sh script: "docker-compose push"
 			}
         }
     }

@@ -1,0 +1,29 @@
+{{- $root := .Values -}}
+{{- $rootDeployments := $root.deployments -}}
+{{- $rootConsumer := $rootDeployments.consumer -}}
+{{- $rootRabbitMQ := $root.rabbitmq -}}
+apiVersion: {{ $rootDeployments.version }} # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ $rootConsumer.name }}
+  labels:
+    app: {{ $rootConsumer.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ $rootConsumer.name }}
+  replicas: {{ $rootConsumer.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ $rootConsumer.name }}
+    spec:
+      containers:
+      - name: {{ $rootConsumer.name }}
+        image: {{ $rootConsumer.image }}
+        resources:
+          requests:
+            cpu: {{ $rootConsumer.cpu }}
+            memory: {{ $rootConsumer.memory }}
+        command: ["python"]
+        args: ["/app/consumer.py" ,"-p", "{{$rootRabbitMQ.port}}", "-s", "{{$rootRabbitMQ.server}}"]

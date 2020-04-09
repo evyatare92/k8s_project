@@ -1,12 +1,10 @@
 version: '3.0'
 services:
   consumer:
+    build: src/consumer
     image: evyatare92/consumer
-    build: .
     restart: always
-    command: python consumer.py -p 5672 -s rabbitmq
   producer:
+    build: src/producer
     image: evyatare92/producer
-    build: .
     restart: always
-    command: 'python producer.py -p 5672 -s rabbitmq -m "Hello" -r 30'

@@ -11,11 +11,3 @@ deployments:
     image: evyatare92/producer
     cpu: 100m
     memory: 256Mi
-  consumer:
-    name: consumer
-    replicaCount: 1
-    image: evyatare92/consumer
-    cpu: 100m
-    memory: 256Mi
-    command: ["python"]
-    
