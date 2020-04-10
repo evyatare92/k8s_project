@@ -151,7 +151,7 @@ master:
   # Put labels on Jenkins master pod
   podLabels: {}
   # Used to create Ingress record (should used with ServiceType: ClusterIP)
-  # nodePort: <to set explicitly, choose port between 30000-32767
+  nodePort: 31893
   # Enable Kubernetes Liveness and Readiness Probes
   # ~ 2 minutes to allow Jenkins to restart when upgrading plugins. Set ReadinessTimeout to be shorter than LivenessTimeout.
   healthProbes: true
