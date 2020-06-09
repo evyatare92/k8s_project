@@ -8,10 +8,11 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 			}
 			stage("Build"){
 				sh script: "pwd"
+				sh script: "apk add git"
+				sh script: "apk add docker-compose"
+				sh script: 'git clone https://github.com/evyatare92/k8s_project.git'
 				sh script: "ls -l"
-				git 'https://github.com/evyatare92/k8s_project.git'
-				sh script: "ls -l"
-				//sh script: "cd src"
+				sh script: "cd k8s_project/src"
 				//sh script: "pwd"
 				//sh script: "docker-compose build"
 			}
