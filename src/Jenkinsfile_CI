@@ -17,6 +17,7 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 				sh script: "echo content of parent directory:"
 				sh script: "ls -l ../CI_Pipeline@tmp"
 				sh script: "echo -------------------------------------"
+				sh script: "sleep 5m"
 				sh script: "echo content of grand parent directory:"
 				sh script: "ls -l ../.."
 				sh script: "echo -------------------------------------"
