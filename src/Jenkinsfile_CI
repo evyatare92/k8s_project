@@ -8,13 +8,15 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 			}
 			stage("Build"){
 				sh script: "pwd"
-				//git 'https://github.com/evyatare92/k8s_project.git'
-				sh script: "cd src"
-				sh script: "pwd"
-				sh script: "docker-compose build"
+				sh script: "ls -l"
+				git 'https://github.com/evyatare92/k8s_project.git'
+				sh script: "ls -l"
+				//sh script: "cd src"
+				//sh script: "pwd"
+				//sh script: "docker-compose build"
 			}
 			stage("Push"){
-				sh script: "docker-compose push"
+				//sh script: "docker-compose push"
 			}
 		}
 	}
