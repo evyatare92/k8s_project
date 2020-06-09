@@ -3,12 +3,12 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 		container('docker'){
 			stage("Checkout"){
 				withCredentials([usernamePassword(credentialsId: 'docker-hub',usernameVariable: 'DOCKERHUB_USER',passwordVariable: 'DOCKERHUB_PASSWORD')]){
-					//sh script: "docker login -u  ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}"		
+					sh script: "docker login -u  ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}"		
 				}
 			}
 			stage("Build"){
 				sh script: "pwd"
-				git 'https://github.com/evyatare92/k8s_project.git'
+				//git 'https://github.com/evyatare92/k8s_project.git'
 				sh script: "cd src"
 				sh script: "pwd"
 				sh script: "docker-compose build"
