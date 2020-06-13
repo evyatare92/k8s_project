@@ -1,4 +1,4 @@
-podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'docker', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/agent')], label: 'mypod', name: 'mypod')  {
+podTemplate(containers: [containerTemplate(args: '', command: '', image: 'evyatare92/dockercompose', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'docker', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/agent')], label: 'mypod', name: 'mypod')  {
     node('mypod'){
 		container('docker'){
 			stage("Checkout"){
@@ -14,11 +14,12 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 				sh script: "pwd"
 				sh script: "ls"
 				sh script: "ls .."
+				sh script: "ls src"
 				//sh script: "docker-compose build"
 			}
 			stage("Push"){
 				sh script: "cd /home/jenkins/agent/workspace/pipeline/src"
-				sh script: "docker-compose push"
+				//sh script: "docker-compose push"
 			}
 		}
 	}
