@@ -8,6 +8,8 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 			}
 			stage("Build"){
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/evyatare92/k8s_project.git']]])
+				sh script: "sleep 5m"
+				sh script: "chmod 775 /home/jenkins/agent/workspace/pipeline/src"
 				sh script: "/home/jenkins/agent/workspace/pipeline/src"
 				sh script: "docker-compose build"
 			}
