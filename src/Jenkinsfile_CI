@@ -11,7 +11,10 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 				sh script: "cd /home/jenkins/agent/workspace/pipeline/src"
 				sh script: "apk add --no-cache py3-pip python3-dev libffi-dev openssl-dev curl gcc libc-dev make"
   				sh script: "pip3 install docker-compose"
-				sh script: "docker-compose build"
+				sh script: "pwd"
+				sh script: "ls"
+				sh script: "ls .."
+				//sh script: "docker-compose build"
 			}
 			stage("Push"){
 				sh script: "cd /home/jenkins/agent/workspace/pipeline/src"
