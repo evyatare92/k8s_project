@@ -1,4 +1,4 @@
-podTemplate(containers: [containerTemplate(args: '', command: '', image: 'tiangolo/docker-with-compose', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'docker', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/agent')], label: 'mypod', name: 'mypod')  {
+podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker', livenessProbe: containerLivenessProbe(execArgs: '', failureThreshold: 0, initialDelaySeconds: 0, periodSeconds: 0, successThreshold: 0, timeoutSeconds: 0), name: 'docker', resourceLimitCpu: '', resourceLimitMemory: '', resourceRequestCpu: '', resourceRequestMemory: '', ttyEnabled: true, workingDir: '/home/jenkins/agent')], label: 'mypod', name: 'mypod')  {
     node('mypod'){
 		container('docker'){
 			stage("Checkout"){
@@ -9,11 +9,13 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'tiango
 			stage("Build"){
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/evyatare92/k8s_project.git']]])
 				sh script: "cd /home/jenkins/agent/workspace/pipeline/src"
-				sh script: "docker-compose -f src/docker-compose.yml build"
+				sh script: "docker build ./src/consumer -t evyatare92/consumer"
+				sh script: "docker build ./src/producer -t evyatare92/producer"
 			}
 			stage("Push"){
 				sh script: "cd /home/jenkins/agent/workspace/pipeline/src"
-				sh script: "docker-compose -f src/docker-compose.yml push"
+				sh script: "docker push evyatare92/consumer"
+				sh script: "docker push evyatare92/producer"
 			}
 		}
 	}
