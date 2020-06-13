@@ -8,6 +8,7 @@ podTemplate(containers: [containerTemplate(args: '', command: '', image: 'docker
 			}
 			stage("Build"){
 				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/evyatare92/k8s_project.git']]])
+				sh script: "sleep 5m"
 				sh script: "cd k8s_project/src"
 				sh script: "pwd"
 				sh script: "docker-compose build"
